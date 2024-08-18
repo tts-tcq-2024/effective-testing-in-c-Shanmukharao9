@@ -7,7 +7,12 @@ int networkAlertStub(float celcius) {
     printf("ALERT: Temperature is %.1f celcius.\n", celcius);
     // Return 200 for ok
     // Return 500 for not-ok
-    // stub always succeeds and returns 200
+    // stub always succeeds and returns 
+    if(isnan(celcius) || isinf(celcius))
+    {
+    printf("ALERT: Temperature is %.1f celcius.\n", celcius);
+    return 500;
+    }
     return 200;
 }
 
@@ -24,11 +29,14 @@ void alertInCelcius(float farenheit) {
 }
 
 int main() {
+    alertInCelcius(NAN);
+    alertInCelcius(INFINITY);
     alertInCelcius(400.5);
     alertInCelcius(303.6);
     alertInCelcius(500);
     alertInCelcius(-5);
     printf("%d alerts failed.\n", alertFailureCount);
+    assert(alertFailureCount == 3);
     printf("All is well (maybe!)\n");
     return 0;
 }
