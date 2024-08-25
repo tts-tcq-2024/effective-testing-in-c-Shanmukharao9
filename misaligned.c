@@ -48,17 +48,16 @@ void test_cases(){
     //interactive-based Testing
     result = printColorMap(&fakeManualPrinterMock);
         // Initialize the expectedManualList
-    colorCodeManualItem expectedManualList[25];
+    
     const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
     const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
     
-   
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
-            expectedManualList[i].capturedColorCode = i;
-            expectedManualList[i].capturedMajorColor = majorColor[i];
-            expectedManualList[i].capturedMinorColor = minorColor[i];
-            
+            int index = i * 5 + j;
+            assert(capturedManualList[index].colorCode == index);
+            assert(strcmp(capturedManualList[index].majorColor, majorColors[i]) == 0);
+            assert(strcmp(capturedManualList[index].minorColor, minorColors[j]) == 0);
         }
     }
     
@@ -71,7 +70,7 @@ void test_cases(){
 
 int main() {
     test_cases();
-    printColorMap(&printColorCodeManualOnConsole); //Remove unused result variable
+    printColorMap(&printColorCodeManualOnConsole); //print color map to console
     printf("All is well (maybe!)\n");
     return 0;
 }
