@@ -9,6 +9,7 @@ typedef struct {
 } colorCodeManualItem;
 
 colorCodeManualItem capturedManualList[25];
+
 void printColorCodeManualOnConsole(int colorCode, const char* majorColor,const char* minorColor){
    printf("%d | %s | %s\n", colorCode, majorColor, minorColor);
 }
@@ -26,7 +27,7 @@ int printColorMap(void (*manualPrinter)(int colorCode, const char* majorColor, c
 }
 
 void fakeManualPrinterStub(int colorCode, const char* majorColor, const char* minorColor) {
-     (void)colorCode;
+    (void)colorCode;
     (void)majorColor;
     (void)minorColor;
     // No logic needed for the stub, just a placeholder
@@ -34,7 +35,7 @@ void fakeManualPrinterStub(int colorCode, const char* majorColor, const char* mi
 
 void fakeManualPrinterMock(int colorCode, const char* majorColor, const char* minorColor) {
     colorCodeManualItem item = {colorCode, majorColor, minorColor};
-   capturedManualList[colorCode] = item;
+    capturedManualList[colorCode] = item;
 }
 
 void test_cases(){
