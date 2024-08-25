@@ -4,6 +4,7 @@
 #include <assert.h>
 
 int alertFailureCount = 0;
+float capturedCelcius;
 
 int networkAlertStub(float celcius) {
     printf("ALERT: Temperature is %.1f celcius.\n", celcius);
@@ -30,7 +31,24 @@ void alertInCelcius(float farenheit) {
     }
 }
 
+int networkAlertMock(float celcius) {
+      capturedCelcius=celcius;
+   return 500;
+}
+
+//TestCases
+void test_cases(){
+      alertInCelcius(400.5,&networkAlertStub);
+      printf("%d alerts failed.\n", alertFailureCount);
+      assert(alertFailureCount == 1); //State Based Testing
+      alertFailureCount=0;
+      float expectedCelcius=200;
+      alertInCelcius(400.5,&networkAlertMock);
+      assert(expectedCelcius == capturedCelcius);
+}
+
 int main() {
+    test_cases();
     alertInCelcius(NAN);
     alertInCelcius(INFINITY);
     alertInCelcius(400.5);
