@@ -34,8 +34,10 @@ void fakeManualPrinterStub(int colorCode, const char* majorColor, const char* mi
 }
 
 void fakeManualPrinterMock(int colorCode, const char* majorColor, const char* minorColor) {
-    colorCodeManualItem item = {colorCode, majorColor, minorColor};
-    capturedManualList[colorCode] = item;
+    if (colorCode < 25) {  
+        ColorCodeManualItem item = {colorCode, majorColor, minorColor};
+        capturedManualList[colorCode] = item;
+    }
 }
 
 void test_cases(){
