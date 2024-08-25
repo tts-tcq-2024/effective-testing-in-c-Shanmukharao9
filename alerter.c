@@ -38,20 +38,18 @@ int networkAlertMock(float celcius) {
 
 //TestCases
 void test_cases(){
-        alertInCelcius(NAN);
-        alertInCelcius(INFINITY);
-        alertInCelcius(400.5);
-        alertInCelcius(303.6);
-        alertInCelcius(500);
-        alertInCelcius(-5);
-        printf("%d alerts failed.\n", alertFailureCount);
-        assert(alertFailureCount == 3);
-
-      assert(alertFailureCount == 1); //State Based Testing
-      alertFailureCount=0;
-      float expectedCelcius=200;
-      alertInCelcius(400.5,&networkAlertMock);
-      assert(expectedCelcius == capturedCelcius);
+    alertInCelcius(NAN);
+    alertInCelcius(INFINITY);
+    alertInCelcius(400.5);
+    alertInCelcius(303.6);
+    alertInCelcius(500);
+    alertInCelcius(-5);
+    printf("%d alerts failed.\n", alertFailureCount);
+    assert(alertFailureCount == 3);
+    assert(alertFailureCount == 1); //State Based Testing
+    alertFailureCount=0;
+    float expectedCelcius=200;
+    assert(expectedCelcius == capturedCelcius);
 }
 
 int main() {
