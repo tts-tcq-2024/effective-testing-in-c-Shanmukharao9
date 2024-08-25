@@ -55,18 +55,11 @@ void test_cases(){
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
             int index = i * 5 + j;
-            assert(capturedManualList[index].colorCode == index);
-            assert(strcmp(capturedManualList[index].majorColor, majorColors[i]) == 0);
-            assert(strcmp(capturedManualList[index].minorColor, minorColors[j]) == 0);
+            assert(colorCodeManualItem[index].capturedColorCode == index);
+            assert(strcmp(colorCodeManualItem[index].capturedMajorColor, majorColors[i]) == 0);
+            assert(strcmp(colorCodeManualItem[index].capturedMinorColor, minorColors[j]) == 0);
         }
     }
-    
-     for (int k = 0; k < 25; k++) {
-         assert(expectedManualList[k].capturedColorCode == capturedManualList[k].capturedColorCode);
-         assert(strcmp(expectedManualList[k].capturedMajorColor, capturedManualList[k].capturedMajorColor) == 0);
-         assert(strcmp(expectedManualList[k].capturedMinorColor, capturedManualList[k].capturedMinorColor) == 0);
-    }
-}
 
 int main() {
     test_cases();
