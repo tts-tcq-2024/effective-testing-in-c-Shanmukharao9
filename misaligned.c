@@ -34,10 +34,8 @@ void fakeManualPrinterStub(int colorCode, const char* majorColor, const char* mi
 }
 
 void fakeManualPrinterMock(int colorCode, const char* majorColor, const char* minorColor) {
-    if (colorCode < 25) {  
-        ColorCodeManualItem item = {colorCode, majorColor, minorColor};
-        capturedManualList[colorCode] = item;
-    }
+    colorCodeManualItem item = {colorCode, majorColor, minorColor};
+    capturedManualList[colorCode] = item;
 }
 
 void test_cases(){
@@ -50,22 +48,30 @@ void test_cases(){
     //interactive-based Testing
     result = printColorMap(&fakeManualPrinterMock);
         // Initialize the expectedManualList
-    
+    colorCodeManualItem expectedManualList[25];
     const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
     const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
     
+   
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
-            int index = i * 5 + j;
-            assert(colorCodeManualItem[index].capturedColorCode == index);
-            assert(strcmp(colorCodeManualItem[index].capturedMajorColor, majorColors[i]) == 0);
-            assert(strcmp(colorCodeManualItem[index].capturedMinorColor, minorColors[j]) == 0);
+            expectedManualList[i].capturedColorCode = i;
+            expectedManualList[i].capturedMajorColor = majorColor[i];
+            expectedManualList[i].capturedMinorColor = minorColor[i];
+            
         }
     }
+    
+     for (int k = 0; k < 25; k++) {
+         assert(expectedManualList[k].capturedColorCode == capturedManualList[k].capturedColorCode);
+         assert(strcmp(expectedManualList[k].capturedMajorColor, capturedManualList[k].capturedMajorColor) == 0);
+         assert(strcmp(expectedManualList[k].capturedMinorColor, capturedManualList[k].capturedMinorColor) == 0);
+    }
 }
+
 int main() {
     test_cases();
-    printColorMap(&printColorCodeManualOnConsole); //print color map to console
+    printColorMap(&printColorCodeManualOnConsole); //Remove unused result variable
     printf("All is well (maybe!)\n");
     return 0;
 }
