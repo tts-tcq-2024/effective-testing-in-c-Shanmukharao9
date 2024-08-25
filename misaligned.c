@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <assert.h>
+#include <string.h>
 
 typedef struct {
     int capturedColorCode;
@@ -8,8 +9,8 @@ typedef struct {
 } colorCodeManualItem;
 
 colorCodeManualItem capturedManualList[25];
-void printColorCodeManualOnConsole(int colorCode, cont char* majorColor,const char* minorColor){
-   printf("%d | %s | %s\n", colorCode, majorColor[i], minorColor[i]);
+void printColorCodeManualOnConsole(int colorCode, const char* majorColor,const char* minorColor){
+   printf("%d | %s | %s\n", colorCode, majorColor, minorColor);
 }
 
 int printColorMap(void (*manualPrinter)(int colorCode, const char* majorColor, const char* minorColor)) {
@@ -33,18 +34,22 @@ void fakeManualPrinterStub(int colorCode, const char* majorColor, const char* mi
 
 void fakeManualPrinterMock(int colorCode, const char* majorColor, const char* minorColor) {
     colorCodeManualItem item = {colorCode, majorColor, minorColor};
-    capturedManualList[colorCode] = item;
+   capturedManualList[colorCode] = item;
 }
 
 void test_cases(){
     //Value-based Testing
-    result = printColorMap(&fakeManualPrinterMock);
+    int result = printColorMap(&fakeManualPrinterMock);
     assert(result == 25);
     assert(result > 24);
     assert(result%5 ==0);
 
     //interactive-based Testing
     result = printColorMap(&fakeManualPrinterMock);
+        // Initialize the expectedManualList
+    colorCodeManualItem expectedManualList[25];
+    const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
+    const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
     
      for (int k = 0; k < 25; k++) {
          assert(expectedManualList[k].capturedColorCode == capturedManualList[k].capturedColorCode);
