@@ -57,7 +57,7 @@ void test_cases(){
         for (int j = 0; j < 5; j++) {
             expectedManualList[i].capturedColorCode = i;
             expectedManualList[i].capturedMajorColor = majorColor[i];
-            expectedManualList[i].capturedMinorColor = minorColor[j];
+            expectedManualList[i].capturedMinorColor = minorColor[i];
             
         }
     }
