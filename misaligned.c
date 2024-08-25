@@ -60,7 +60,7 @@ void test_cases(){
             assert(strcmp(colorCodeManualItem[index].capturedMinorColor, minorColors[j]) == 0);
         }
     }
-
+}
 int main() {
     test_cases();
     printColorMap(&printColorCodeManualOnConsole); //print color map to console
