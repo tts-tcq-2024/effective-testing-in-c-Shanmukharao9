@@ -52,6 +52,16 @@ void test_cases(){
     const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
     const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
     
+    int index = 0;
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            expectedManualList[index].capturedColorCode = index;
+            expectedManualList[index].capturedMajorColor = majorColor[i];
+            expectedManualList[index].capturedMinorColor = minorColor[j];
+            index++;
+        }
+    }
+    
      for (int k = 0; k < 25; k++) {
          assert(expectedManualList[k].capturedColorCode == capturedManualList[k].capturedColorCode);
          assert(strcmp(expectedManualList[k].capturedMajorColor, capturedManualList[k].capturedMajorColor) == 0);
