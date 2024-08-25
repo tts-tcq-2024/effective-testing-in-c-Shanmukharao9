@@ -38,12 +38,19 @@ void fakeManualPrinterMock(int colorCode, const char* majorColor, const char* mi
 
 void test_cases(){
     //Value-based Testing
+    result = printColorMap(&fakeManualPrinterMock);
     assert(result == 25);
     assert(result > 24);
     assert(result%5 ==0);
 
     //interactive-based Testing
     result = printColorMap(&fakeManualPrinterMock);
+    
+     for (int k = 0; k < 25; k++) {
+         assert(expectedManualList[k].capturedColorCode == capturedManualList[k].capturedColorCode);
+         assert(strcmp(expectedManualList[k].capturedMajorColor, capturedManualList[k].capturedMajorColor) == 0);
+         assert(strcmp(expectedManualList[k].capturedMinorColor, capturedManualList[k].capturedMinorColor) == 0);
+    }
 }
 
 int main() {
